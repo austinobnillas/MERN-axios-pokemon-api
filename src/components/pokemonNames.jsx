@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const PokemonNames = () => {
     const [pokemon, setPokemon] = useState([]);
 
-    const getNames = () => {
-        fetch("https://pokeapi.co/api/v2/pokemon/")
-        .then((res) => res.json())
-        .then((data) => setPokemon(data.results))
-        .catch((err) => console.log(err));
-    };
+    useEffect(()=> {
+        axios.get('https://pokeapi.co/api/v2/pokemon/')
+        .then(res=>{setPokemon(res.data.results)})
+    }, [])
+
+    //USING FETCH COMMENTED OUT
+    // const getNames = () => {
+    //     fetch("https://pokeapi.co/api/v2/pokemon/")
+    //     .then((res) => res.json())
+    //     .then((data) => setPokemon(data.results))
+    //     .catch((err) => console.log(err));
+    // };
+
     return (
         <div>
-        <button onClick={getNames}>click</button>
         <div>
             <ul>{pokemon.map((names, index) => {
                 return <li key={index}>{names.name}</li>;

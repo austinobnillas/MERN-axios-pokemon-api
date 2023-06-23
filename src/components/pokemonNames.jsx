@@ -19,12 +19,10 @@ const PokemonNames = () => {
 
     return (
         <div>
-        <div>
             <ul>{pokemon.map((names, index) => {
                 return <li key={index}>{names.name}</li>;
             })
             }</ul>
-        </div>
         </div>
     );
 };
